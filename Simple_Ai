@@ -1,0 +1,16 @@
+import tensorflow as tf
+import numpy as np
+from tensorflow import keras
+
+X = np.array([1, 2, 3, 4, 5], dtype=float)
+y = np.array([12, 24, 36, 48, 60], dtype=float)
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(1,))
+])
+model.compile(optimizer='sgd', loss='mean_squared_error')
+model.fit(X, y, epochs=2000, verbose=0)
+test_feet = np.array([5, 12, 20, 7, 5, 12, 30, 15, 27, 1], dtype=float)
+predictions = model.predict(test_feet)
+
+for feet, inches in zip(test_feet, predictions):
+    print(f"{feet} feet is approximately {inches[0]:.2f} inches.")
